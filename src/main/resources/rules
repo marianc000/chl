@@ -3,7 +3,7 @@
 # An: Antibiotic
 # I: Insulin
 # P: Paracetamol
-# -: none - my addition to fasilitate parsing of the file
+# -: none - my addition to facilitate parsing of the file
 
 # States
 # F: Fever
@@ -11,7 +11,7 @@
 # D: Diabetes
 # T: Tuberculosis
 # X: Dead
-# *: any - my addition to fasilitate parsing of the file
+# *: any - my addition to facilitate parsing of the file
 #Drugs                 Initial state                Resulting state Probability(1/n)                 Comment
 As                     F                            H               1                                Aspirin cures Fever
 An                     T                            H               1                                Antibiotic cures Tuberculosis
