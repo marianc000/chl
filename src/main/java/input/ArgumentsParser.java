@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package folder;
+package input;
 
-import static folder.Constants.COMMA;
-import java.util.Arrays;
-import java.util.HashSet;
+ 
+import static folder.Constants.NO_NEEDED_DRUG;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
+import static utils.Utils.commaSeparatedStringToList;
+import static utils.Utils.commaSeparatedStringToSet;
 
 /**
  *
@@ -18,20 +13,18 @@ import java.util.stream.Collectors;
  */
 public class ArgumentsParser {
 
-    Set<String> stringToSet(String str) {
-        return new HashSet<>(Arrays.asList(str.split(COMMA)));
-    }
+    public PatientsAndTreatments parse(String[] args) {
+        List<String> states = commaSeparatedStringToList(args[0]);
+        
+        String drugParam = NO_NEEDED_DRUG;//none
 
-    List<PatientWithTreatment> parse(String[] args) {
-        Set<String> states = stringToSet(args[0]);
-        Set<String> drugs;
         if (args.length > 1) {
-            drugs = stringToSet(args[1]);
-        } else {
-            drugs = new HashSet<>();
+            drugParam = args[1];
         }
 
-        return states.stream().map(state -> new PatientWithTreatment(state, drugs)).collect(Collectors.toList());
+        Set<String> drugs = commaSeparatedStringToSet(drugParam);
+
+        return new PatientsAndTreatments(states, drugs);
     }
 
 }

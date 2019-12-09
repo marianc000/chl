@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
+import static utils.Utils.commaSeparatedStringToSet;
+import static utils.Utils.readLinesFromResource;
 
 /**
  *
@@ -21,21 +23,9 @@ public class RulesInTextReader {
     String RULES_FILE_NAME = "/rules";
 
     List<String> readText() throws IOException {
-
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(RULES_FILE_NAME)))) {
-            List<String> lines = new LinkedList<>();
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                if (line.startsWith("#") || line.trim().isEmpty()) {
-                    continue;
-                }
-                lines.add(line);
-
-            }
-
-            return lines;
-        }
+        List<String> lines = readLinesFromResource(RULES_FILE_NAME);
+        lines.removeIf(line -> line.startsWith("#") || line.trim().isEmpty());
+        return lines;
     }
 
     Pattern emptySpacePattern = Pattern.compile("[ \\t]+");
@@ -47,9 +37,14 @@ public class RulesInTextReader {
     public List<Rule> getRules() throws IOException {
         List<String> rulesLines = readText();
         List<Rule> rules = new LinkedList<>();
-        for (String line : rulesLines) {   
+        for (String line : rulesLines) {
             String[] params = extractParameteresFromLine(line);
-            rules.add(new Rule(params[0], params[1], params[2], Integer.valueOf(params[3])));
+
+            rules.add(new Rule(
+                    commaSeparatedStringToSet(params[0]),
+                    params[1],
+                    params[2],
+                    Integer.valueOf(params[3])));
         }
         return rules;
     }

@@ -3,27 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package folder;
+package input;
 
+import java.util.List;
 import java.util.Set;
 
 /**
  *
  * @author mcaikovs
  */
-public class PatientWithTreatment {
+public class PatientsAndTreatments {
 
-    String states;
+    List<String> states;
     Set<String> drugs;
 
-    public PatientWithTreatment(String states, Set<String> drugs) {
+    public PatientsAndTreatments(List<String> states, Set<String> drugs) {
         this.states = states;
         this.drugs = drugs;
     }
 
-    public String getStates() {
+    public List<String> getStates() {
         return states;
     }
+ 
 
     public Set<String> getDrugs() {
         return drugs;

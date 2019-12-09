@@ -28,10 +28,7 @@ public class RuleSummary {
     Set<String> getAllDrugs() {
         Set<String> drugs = new HashSet<>(); // longest drugs first
         rules.forEach(rule -> {
-            String[] drugsInRule = rule.getDrugs().split(COMMA);
-            for (String drugInRule : drugsInRule) {
-                drugs.add(drugInRule);
-            }
+                drugs.addAll(rule.getDrugs());
         });
 
         return drugs;

@@ -5,27 +5,39 @@
  */
 package rules;
 
+import static folder.Constants.NO_NEEDED_DRUG;
+import java.util.Set;
+
 /**
  *
  * @author mcaikovs
  */
 public class Rule {
 
-    String drugs, initialState;
+    Set<String> drugs;
+    String initialState;
     Prognosis prognosis;
 
-    public Rule(String drugs, String initialState, String resultingState, int probability) {
+    public Rule(Set<String> drugs, String initialState, String resultingState, int probability) {
         this.drugs = drugs;
         this.initialState = initialState;
         this.prognosis = new Prognosis(resultingState, probability);
     }
 
-    public String getDrugs() {
+    public Set<String> getDrugs() {
         return drugs;
+    }
+
+    public boolean noDrugRule() {
+        return drugs.contains(NO_NEEDED_DRUG);
     }
 
     public String getInitialState() {
         return initialState;
+    }
+
+    public boolean isApplicableForState(String state) {
+        return initialState.equals(state);
     }
 
     public String getResultingState() {
