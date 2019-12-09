@@ -5,7 +5,7 @@
  */
 package rules;
 
-import static folder.Constants.NO_NEEDED_DRUG;
+import static folder.Constants.NO_DRUGS;
 import java.util.Set;
 
 /**
@@ -29,7 +29,7 @@ public class Rule {
     }
 
     public boolean noDrugRule() {
-        return drugs.contains(NO_NEEDED_DRUG);
+        return drugs.contains(NO_DRUGS);
     }
 
     public String getInitialState() {

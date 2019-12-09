@@ -20,7 +20,7 @@ import static utils.Utils.readLinesFromResource;
  */
 public class RulesInTextReader {
 
-    String RULES_FILE_NAME = "/rules";
+    String RULES_FILE_NAME = "/ruleList";
 
     List<String> readText() throws IOException {
         List<String> lines = readLinesFromResource(RULES_FILE_NAME);

@@ -5,8 +5,11 @@
  */
 package output;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -15,6 +18,7 @@ import java.util.Map;
 public class Output {
 
     Map<String, Integer> map = new HashMap<>();
+    List<String> format = Arrays.asList("F", "H", "D", "T", "X");
 
     public void addState(String state) {
         Integer count = map.get(state);
@@ -26,8 +30,14 @@ public class Output {
         map.put(state, count);
     }
 
-    public void print() {
-        System.out.println(map);
+    String formatState(String state) {
+        return state + ":" + (map.get(state) != null ? map.get(state) : 0);
     }
-    // order output
+
+    public String print() {
+        System.out.println(map);
+        return format.stream().map(state -> formatState(state)).collect(Collectors.joining(","));
+    }
+
+// order output
 }

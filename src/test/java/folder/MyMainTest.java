@@ -5,6 +5,7 @@
  */
 package folder;
 
+import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,24 +15,14 @@ import static org.junit.Assert.*;
  *
  * @author mcaikovs
  */
-public class DrugTest {
-    
-    public DrugTest() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
+public class MyMainTest {
+
+    MyMain i = new MyMain();
 
     @Test
-    public void testHash() {
-        for (Drug d:Drug.values()){
-            System.out.println(d+" "+d.hashCode());
-        }
+    public void testRun() throws IOException {
+        assertEquals(i.run(new String[]{"F", "P"}), "F:0,H:1,D:0,T:0,X:0");
+        assertEquals(i.run(new String[]{"D,D"}), "F:0,H:0,D:0,T:0,X:2");
     }
-    
+
 }

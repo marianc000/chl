@@ -13,5 +13,5 @@ public class Constants {
 
     public static String COMMA = ",";
     public static String ANY_STATE = "*";
-    public static String NO_NEEDED_DRUG = "-";
+    public static String NO_DRUGS = "-";
 }
