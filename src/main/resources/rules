@@ -1,0 +1,23 @@
+# Drugs:
+# As: Aspirin
+# An: Antibiotic
+# I: Insulin
+# P: Paracetamol
+# -: none - my addition to fasilitate parsing of the file
+
+# States
+# F: Fever
+# H: Healthy
+# D: Diabetes
+# T: Tuberculosis
+# X: Dead
+# *: any - my addition to fasilitate parsing of the file
+#Drugs                 Initial state                Resulting state Probability(1/n)                 Comment
+As                     F                            H               1                                Aspirin cures Fever
+An                     T                            H               1                                Antibiotic cures Tuberculosis
+I                      D                            D               1                                Insulin prevents diabetic subject from dying
+-                      D                            X               1                                Insulin does not cure Diabetes
+I,An                   *                            F               1                                If insulin is mixed with antibiotic, HEALTHY(all?) people catch Fever
+P                      F                            H               1                                Paracetamol cures Fever
+P,As                   *                            X               1                                Paracetamol kills subject if mixed with aspirin;                                
+-                      X                            H               1000000                          One time in a million Dead becomes Healthy  

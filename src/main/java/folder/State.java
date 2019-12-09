@@ -37,10 +37,5 @@ public enum State {
         this.prognosisProbability = prognosisProbability;
     }
 
-    public State getNextStateWithoutDrugs() {
-        if (prognosis != null && prognosisFulfilled(prognosisProbability)) {
-            return prognosis;
-        }
-        return this;
-    }
+
 }
