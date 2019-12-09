@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package folder;
+package rules;
 
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -15,33 +14,23 @@ import java.util.Random;
 public class Prognosis {
 
     static Random rand = new Random();
-    State prognosis;
-    int prognosisProbability = 1;
-    List<Drug> drugs;
+    String prognosis;
+    int prognosisProbability  ;
 
-    public Prognosis(State prognosis) {
+    public Prognosis(String prognosis, int prognosisProbability) {
         this.prognosis = prognosis;
-    }
-
-    public Prognosis(State prognosis, int prognosisProbability) {
-        this(prognosis);
         this.prognosisProbability = prognosisProbability;
     }
-
-    public Prognosis(State prognosis, int prognosisProbability, List<Drug> drugs) {
-        this(prognosis, prognosisProbability);
-        this.drugs = drugs;
-    }
+   
 
     boolean prognosisFulfilled(int prognosisProbability) {
         return rand.nextInt(prognosisProbability) == 0;
     }
 
-    public State getNewState() {
+    public String getNewState() {
         if (prognosisFulfilled(prognosisProbability)) {
             return prognosis;
         }
         return null;
     }
-
 }

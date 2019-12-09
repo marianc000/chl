@@ -11,5 +11,5 @@ package folder;
  */
 public class Constants {
 
-     static String COMMA = ",";
+    public static String COMMA = ",";
 }

@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package folder;
-
+package rules;
+ 
 import static folder.Constants.COMMA;
 import java.util.Comparator;
 import java.util.HashSet;

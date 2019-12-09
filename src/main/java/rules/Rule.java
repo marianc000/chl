@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package folder;
+package rules;
 
 /**
  *
@@ -11,15 +11,15 @@ package folder;
  */
 public class Rule {
 
-    String drugs, initialState, resultingState;
-    int probability;
+    String drugs, initialState;
+    Prognosis prognosis;
 
-    public  Rule(String drugs, String initialState, String resultingState, int probability) {
+    public Rule(String drugs, String initialState, String resultingState, int probability) {
         this.drugs = drugs;
         this.initialState = initialState;
-        this.resultingState = resultingState;
-        this.probability = probability;
+        this.prognosis = new Prognosis(resultingState, probability);
     }
+
     public String getDrugs() {
         return drugs;
     }
@@ -29,12 +29,10 @@ public class Rule {
     }
 
     public String getResultingState() {
-        return resultingState;
+        String newState = this.prognosis.getNewState();
+        if (newState == null) {
+            newState = this.initialState;
+        }
+        return newState;
     }
-
-    public int getProbability() {
-        return probability;
-    }
-
-
 }

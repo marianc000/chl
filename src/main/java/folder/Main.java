@@ -3,6 +3,8 @@ package folder;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
+import rules.Rule;
+import rules.RulesInTextReader;
 
 /**
  *
