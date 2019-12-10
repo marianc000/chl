@@ -16,7 +16,7 @@
 F                   As        H                                   F                                         Aspirin cures Fever
 T                   An        H                                   T                                         Antibiotic cures Tuberculosis
 D                   I         D                                   X                                         Insulin prevents diabetic subject from dying but does not cure Diabetes
-*                   I,An      F                                   *                                         If insulin is mixed with antibiotic, HEALTHY(living???) people catch Fever
+H                   I,An      F                                   H                                         If insulin is mixed with antibiotic, HEALTHY people catch Fever
 F                   P         H                                   F                                         Paracetamol cures Fever
 *                   P,As      X                                   *                                         Paracetamol kills subject if mixed with aspirin;                                
-X                   *         H/1000000                           D                                         One time in a million Dead becomes Healthy  
+X                   *         H/1000000                           H/1000000                                 One time in a million Dead becomes Healthy  

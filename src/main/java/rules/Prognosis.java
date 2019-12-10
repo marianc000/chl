@@ -27,6 +27,9 @@ public class Prognosis {
 
     public State getNewState(State currentState) {
         if (prognosisFulfilled(inverseProbability)) {
+            if (state.isAllNotDead()) {
+                return currentState;
+            }
             return state;
         }
         return currentState;

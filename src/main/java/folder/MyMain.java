@@ -45,12 +45,13 @@ public class MyMain {
         }
 
         List<State> states = Arrays.stream(args[0].split(COMMA)).map(stateStr -> new State(stateStr)).collect(Collectors.toList());
-        Set<String> drugs = new HashSet<>();
 
+        String drugStr = null;
         if (args.length == 2) {
-            drugs = commaSeparatedStringToSet(args[1]);
+            drugStr = args[1];
         }
-
+        Set<String> drugs = commaSeparatedStringToSet(drugStr);
+        
         List<Rule> rules = new RulesInTextReader().getRules();
 
         return new MyMain().run(states, drugs, rules, new Output());

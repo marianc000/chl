@@ -29,6 +29,9 @@ public class Utils {
     }
 
     public static Set<String> commaSeparatedStringToSet(String str) {
+        if (str == null) {
+            return new HashSet<>();
+        }
         return new HashSet<>(Arrays.asList(str.split(COMMA)));
     }
 
@@ -36,7 +39,6 @@ public class Utils {
         return Arrays.asList(str.split(COMMA));
     }
 
-    
     public static List<String> readTextLinesFromResource(String fileName) throws IOException {
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(Utils.class.getResourceAsStream(fileName)))) {
