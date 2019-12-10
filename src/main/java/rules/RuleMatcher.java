@@ -16,8 +16,8 @@ public class RuleMatcher {
         this.rules = rules;
     }
 
-    public List<Rule> getMatchingRules(Set<String> drugs) {
-        return rules.stream().filter(rule -> drugs.containsAll(rule.getDrugs()) || rule.noDrugRule()).collect(Collectors.toList());
-    }
+//    public List<Rule> getMatchingRules(Set<String> drugs) {
+//        return rules.stream().filter(rule -> drugs.containsAll(rule.getDrugs()) || rule.noDrugRule()).collect(Collectors.toList());
+//    }
 
 }

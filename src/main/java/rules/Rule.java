@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package rules;
 
-import static folder.Constants.NO_DRUGS;
 import java.util.Set;
 
 /**
@@ -14,37 +8,53 @@ import java.util.Set;
  */
 public class Rule {
 
+    State initialState;
     Set<String> drugs;
-    String initialState;
-    Prognosis prognosis;
+    Prognosis stateAfterTreatment, stateWtithoutTreatment;
 
-    public Rule(Set<String> drugs, String initialState, String resultingState, int probability) {
-        this.drugs = drugs;
+    public Rule(State initialState, Set<String> drugs, Prognosis stateAfterTreatment, Prognosis stateWtithoutTreatment) {
         this.initialState = initialState;
-        this.prognosis = new Prognosis(resultingState, probability);
+        this.drugs = drugs;
+        this.stateAfterTreatment = stateAfterTreatment;
+        this.stateWtithoutTreatment = stateWtithoutTreatment;
     }
 
-    public Set<String> getDrugs() {
-        return drugs;
+    @Override
+    public String toString() {
+        return "Rule{" + "initialState=" + initialState + ", drugs=" + drugs + ", stateAfterTreatment=" + stateAfterTreatment + ", stateWtithoutTreatment=" + stateWtithoutTreatment + '}';
     }
 
-    public boolean noDrugRule() {
-        return drugs.contains(NO_DRUGS);
+//
+//    public Set<String> getDrugs() {
+//        return drugs;
+//    }
+//
+//    public boolean noDrugRule() {
+//        return drugs.contains(NO_DRUGS);
+//    }
+    boolean isApplicableForState(State patientState) {
+        return initialState.equals(patientState)
+                || (initialState.isAllNotDead() && patientState.isAlive());
     }
 
-    public String getInitialState() {
-        return initialState;
+    public State getResultingState(State patientState, Set<String> usedDrugs) {
+
+        State r = getResultingState2(patientState, usedDrugs);
+        System.out.println("patientState=" + patientState + ", usedDrugs=" + usedDrugs + ", r=" + r);
+        return r;
     }
 
-    public boolean isApplicableForState(String state) {
-        return initialState.equals(state);
-    }
+    State getResultingState2(State patientState, Set<String> usedDrugs) {
 
-    public String getResultingState() {
-        String newState = this.prognosis.getNewState();
-        if (newState == null) {
-            newState = this.initialState;
+        if (!isApplicableForState(patientState)) {
+            System.out.println("NA");
+            return patientState;
         }
-        return newState;
+
+        if (usedDrugs.containsAll(drugs)) {
+            return stateAfterTreatment.getNewState(patientState);
+        }
+
+        return stateWtithoutTreatment.getNewState(patientState);
     }
 }

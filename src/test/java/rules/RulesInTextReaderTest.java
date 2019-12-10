@@ -23,30 +23,33 @@ public class RulesInTextReaderTest {
     }
     RulesInTextReader i = new RulesInTextReader();
 
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
     @Test
     public void testreadText() throws IOException {
         List<String> r = i.readText();
-        assertTrue(r.size() == 8);
+        assertTrue(r.size() == 7);
     }
 
     @Test
     public void testextractParameteresFromLine() throws IOException {
-        String s = "As                     F                            H               1                                #Aspirin cures Fever";
+        String s = "X                   *         H/1000000                           D                                         One time in a million Dead becomes Healthy";
         String[] r = i.extractParameteresFromLine(s);
-        assertTrue(r.length >= 4);
+        assertTrue(r.length > 4);
     }
 
     @Test
     public void testgetRules() throws IOException {
         List<Rule> r = i.getRules();
-        assertTrue(r.size() == 8);
+        assertTrue(r.size() == 7);
+    }
+
+    @Test
+    public void testExtractExpectedStateWithProbability() throws IOException {
+        Prognosis p = i.extractExpectedStateWithProbability("X");
+        assertEquals(p.inverseProbability, 1);
+        assertEquals(p.state, "X");
+
+        p = i.extractExpectedStateWithProbability("H/1000000");
+        assertEquals(p.inverseProbability, 1000000);
+        assertEquals(p.state, "H");
     }
 }

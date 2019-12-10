@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package rules;
 
 import java.util.Random;
@@ -14,23 +9,32 @@ import java.util.Random;
 public class Prognosis {
 
     static Random rand = new Random();
-    String prognosis;
-    int prognosisProbability  ;
+    State state;
+    int inverseProbability = 1; // happens always
 
-    public Prognosis(String prognosis, int prognosisProbability) {
-        this.prognosis = prognosis;
-        this.prognosisProbability = prognosisProbability;
-    }
-   
-
-    boolean prognosisFulfilled(int prognosisProbability) {
-        return rand.nextInt(prognosisProbability) == 0;
+    public Prognosis(State state) {
+        this.state = state;
     }
 
-    public String getNewState() {
-        if (prognosisFulfilled(prognosisProbability)) {
-            return prognosis;
+    public Prognosis(State state, int inverseProbability) {
+        this(state);
+        this.inverseProbability = inverseProbability;
+    }
+
+    boolean prognosisFulfilled(int inverseProbability) {
+        return rand.nextInt(inverseProbability) == 0;
+    }
+
+    public State getNewState(State currentState) {
+        if (prognosisFulfilled(inverseProbability)) {
+            return state;
         }
-        return null;
+        return currentState;
     }
+
+    @Override
+    public String toString() {
+        return state + "/" + inverseProbability;
+    }
+
 }

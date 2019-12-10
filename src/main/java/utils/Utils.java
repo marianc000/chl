@@ -36,7 +36,8 @@ public class Utils {
         return Arrays.asList(str.split(COMMA));
     }
 
-    public static List<String> readLinesFromResource(String fileName) throws IOException {
+    
+    public static List<String> readTextLinesFromResource(String fileName) throws IOException {
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(Utils.class.getResourceAsStream(fileName)))) {
             List<String> lines = new LinkedList<>();

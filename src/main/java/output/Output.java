@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import rules.State;
 
 /**
  *
@@ -20,7 +21,8 @@ public class Output {
     Map<String, Integer> map = new HashMap<>();
     List<String> format = Arrays.asList("F", "H", "D", "T", "X");
 
-    public void addState(String state) {
+    public void addState(State stateObj) {
+        String state = stateObj.getState();
         Integer count = map.get(state);
         if (count == null) {
             count = 1;
@@ -34,7 +36,7 @@ public class Output {
         return state + ":" + (map.get(state) != null ? map.get(state) : 0);
     }
 
-    public String print() {
+    public String getOutput() {
         System.out.println(map);
         return format.stream().map(state -> formatState(state)).collect(Collectors.joining(","));
     }

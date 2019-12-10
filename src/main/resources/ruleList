@@ -3,7 +3,7 @@
 # An: Antibiotic
 # I: Insulin
 # P: Paracetamol
-# -: none - my addition to facilitate parsing of the file
+# *: any drugs - my addition to facilitate parsing of the file
 
 # States
 # F: Fever
@@ -11,13 +11,12 @@
 # D: Diabetes
 # T: Tuberculosis
 # X: Dead
-# *: any - my addition to facilitate parsing of the file
-#Drugs                 Initial state                Resulting state Probability(1/n)                 Comment
-As                     F                            H               1                                Aspirin cures Fever
-An                     T                            H               1                                Antibiotic cures Tuberculosis
-I                      D                            D               1                                Insulin prevents diabetic subject from dying
--                      D                            X               1                                Insulin does not cure Diabetes
-I,An                   *                            F               1                                If insulin is mixed with antibiotic, HEALTHY(all?) people catch Fever
-P                      F                            H               1                                Paracetamol cures Fever
-P,As                   *                            X               1                                Paracetamol kills subject if mixed with aspirin;                                
--                      X                            H               1000000                          One time in a million Dead becomes Healthy  
+# *: Alive - my addition to facilitate parsing of the file
+#Initial state      Drugs     State after treatment(/probability) State without treatment(/probability)     Comment
+F                   As        H                                   F                                         Aspirin cures Fever
+T                   An        H                                   T                                         Antibiotic cures Tuberculosis
+D                   I         D                                   X                                         Insulin prevents diabetic subject from dying but does not cure Diabetes
+*                   I,An      F                                   *                                         If insulin is mixed with antibiotic, HEALTHY(living???) people catch Fever
+F                   P         H                                   F                                         Paracetamol cures Fever
+*                   P,As      X                                   *                                         Paracetamol kills subject if mixed with aspirin;                                
+X                   *         H/1000000                           D                                         One time in a million Dead becomes Healthy  
