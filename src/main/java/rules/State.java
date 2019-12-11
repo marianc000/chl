@@ -1,40 +1,52 @@
 package rules;
 
-import java.util.Objects;
-
 /**
  *
  * @author mcaikovs
  */
 public class State {
 
-    String state;
+    String stateString;
 
-    public State(String state) {
-        this.state = state;
+    public State(String stateString) {
+        this.stateString = stateString;
     }
 
-    protected boolean isAlive() {
-        return !"X".equals(state);
+    protected String deadStateString() {
+        return "X";
     }
 
-    protected boolean isAllNotDead() {
-        return "*".equals(state);
+    boolean isAlive() {
+        return !deadStateString().equals(stateString);
     }
 
-    @Override
-    public String toString() {
-        return state;
+    protected String livingStatesWildcardString() {
+        return "*";
     }
 
-    public String getState() {
-        return state;
+    boolean isWildcardForAlive() {
+        return livingStatesWildcardString().equals(stateString);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        final State other = (State) obj;
-        return this.state.equals(other.state);
+    protected String noNewStateString() {
+        return "-";
+    }
+
+    public boolean doesNotChange() {
+        return noNewStateString().equals(stateString);
+    }
+
+    public boolean matches(State patientState) {
+        return equals(patientState)
+                || (isWildcardForAlive() && patientState.isAlive());   // patient cannot have a wildcard state, so no need to check
+    }
+
+    public String getStateString() {
+        return stateString;
+    }
+
+    public boolean equals(State state) {
+        return stateString.equals(state.stateString);
     }
 
 }

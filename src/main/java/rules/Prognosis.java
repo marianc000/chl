@@ -9,35 +9,32 @@ import java.util.Random;
 public class Prognosis {
 
     static Random rand = new Random();
-    State state;
-    int inverseProbability = 1; // happens always
+    State nextState;
+    int inverseProbability = 1; // by default happens always
 
-    public Prognosis(State state) {
-        this.state = state;
+    public Prognosis(State nextState) {
+        this.nextState = nextState;
     }
 
-    public Prognosis(State state, int inverseProbability) {
-        this(state);
+    public Prognosis(State nextState, int inverseProbability) {
+        this(nextState);
         this.inverseProbability = inverseProbability;
     }
 
-    boolean prognosisFulfilled(int inverseProbability) {
+    boolean fulfilled() {
         return rand.nextInt(inverseProbability) == 0;
     }
 
     public State getNewState(State currentState) {
-        if (prognosisFulfilled(inverseProbability)) {
-            if (state.isAllNotDead()) {
-                return currentState;
-            }
-            return state;
+        if (fulfilled()
+                && !nextState.doesNotChange()) { // patient is not not poisoned
+            return nextState;
         }
         return currentState;
     }
 
     @Override
     public String toString() {
-        return state + "/" + inverseProbability;
+        return nextState + "/" + inverseProbability;
     }
-
 }
