@@ -1,6 +1,7 @@
 package rules;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -21,7 +22,7 @@ public class RuleTest {
     String exec(int ruleIdx, String patientState, String usedDrugs) {
         return rules.get(ruleIdx).
                 applyRuleToGetNewState(new State(patientState),
-                        commaSeparatedStringToSet(usedDrugs)).getStateString();
+                        usedDrugs!=null?commaSeparatedStringToSet(usedDrugs):new HashSet<>()).getStateString();
     }
 
     @Test

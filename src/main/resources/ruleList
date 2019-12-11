@@ -11,12 +11,16 @@
 # D: Diabetes
 # T: Tuberculosis
 # X: Dead
-# *: Alive - my addition to facilitate parsing of the file
+
+# My additional states to facilitate parsing of the file
+# *: Alive 
+# -: Does not change
+
 #Initial state      Drugs               State after treatment(/probability) State without treatment(/probability)     Comment
 F                   As                  H                                   -                                         Aspirin cures Fever
 T                   An                  H                                   -                                         Antibiotic cures Tuberculosis
 D                   I                   -                                   X                                         Insulin prevents diabetic subject from dying but does not cure Diabetes
 H                   I,An                F                                   -                                         If insulin is mixed with antibiotic, HEALTHY people catch Fever
-F                   P                   H                                   -                                        Paracetamol cures Fever
+F                   P                   H                                   -                                         Paracetamol cures Fever
 *                   P,As                X                                   -                                         Paracetamol kills subject if mixed with aspirin;                                
 X                   ONLY_MIRACLE        H                                   H/1000000                                 One time in a million Dead becomes Healthy  
