@@ -19,31 +19,23 @@ public class RuleTest {
 
     public RuleTest() throws IOException {
         rules = new RulesInTextReader().getRules();
-        for (int c = 0; c < rules.size(); c++) {
-            System.out.println(c + "\t" + rules.get(c));
-        }
-
+//        for (int c = 0; c < rules.size(); c++) {
+//            System.out.println(c + "\t" + rules.get(c));
+//        }
+//
     }
 
-//0	Rule{initialState=F, drugs=[As], stateAfterTreatment=H/1, stateWtithoutTreatment=F/1}
-//1	Rule{initialState=T, drugs=[An], stateAfterTreatment=H/1, stateWtithoutTreatment=T/1}
-//2	Rule{initialState=D, drugs=[I], stateAfterTreatment=D/1, stateWtithoutTreatment=X/1}
-//3	Rule{initialState=*, drugs=[I, An], stateAfterTreatment=F/1, stateWtithoutTreatment=*/1}
-//4	Rule{initialState=F, drugs=[P], stateAfterTreatment=H/1, stateWtithoutTreatment=F/1}
-//5	Rule{initialState=*, drugs=[P, As], stateAfterTreatment=X/1, stateWtithoutTreatment=*/1}
-//6	Rule{initialState=X, drugs=[*], stateAfterTreatment=H/1000000, stateWtithoutTreatment=D/1}
     List<Rule> rules;
 
-    String exec(int ruleIdx, String state, String drugs) {
+    String exec(int ruleIdx, String patientState, String usedDrugs) {
         return rules.get(ruleIdx).
-                getResultingState(new State(state),
-                        commaSeparatedStringToSet(drugs)).getState();
+                applyRuleToGetNewState(new State(patientState),
+                        commaSeparatedStringToSet(usedDrugs)).stateString;
     }
 
     @Test
-    public void testSomeMethod() {
-        String r;
-
+    public void testRule() {
+        assertEquals(rules.size(), 7);
         assertEquals(exec(0, "F", "As"), "H"); // matches and treated
         assertEquals(exec(0, "F", null), "F"); // matches not treated
         assertEquals(exec(0, "F", "An"), "F"); // matches treated with wrong drugs
@@ -91,10 +83,6 @@ public class RuleTest {
         assertEquals(exec(6, "X", "An"), "X"); // matches treated with wrong drugs
         assertEquals(exec(6, "T", "As"), "T"); // drugs match
         assertEquals(exec(6, "T", "An"), "T"); // state and drugs do not match
-
-//        assertEquals(exec(3, "X", "As"), "X"); // state and drugs do not match
-        r = exec(0, "T", "An");
-        System.out.println(r);
     }
 
 }

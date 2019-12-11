@@ -8,50 +8,32 @@ import java.util.Set;
  */
 public class Rule {
 
-    State initialState;
-    Set<String> drugs;
+    State applicableForState;
+    Set<String> requiredDrugs;
     Prognosis stateAfterTreatment, stateWtithoutTreatment;
 
-    public Rule(State initialState, Set<String> drugs, Prognosis stateAfterTreatment, Prognosis stateWtithoutTreatment) {
-        this.initialState = initialState;
-        this.drugs = drugs;
+    public Rule(State applicableForState, Set<String> drugs, Prognosis stateAfterTreatment, Prognosis stateWtithoutTreatment) {
+        this.applicableForState = applicableForState;
+        this.requiredDrugs = drugs;
         this.stateAfterTreatment = stateAfterTreatment;
         this.stateWtithoutTreatment = stateWtithoutTreatment;
     }
-
-    @Override
-    public String toString() {
-        return "Rule{" + "initialState=" + initialState + ", drugs=" + drugs + ", stateAfterTreatment=" + stateAfterTreatment + ", stateWtithoutTreatment=" + stateWtithoutTreatment + '}';
-    }
-
 //
-//    public Set<String> getDrugs() {
-//        return drugs;
+//    @Override
+//    public String toString() {
+//        return "Rule{" + "applicableForState=" + applicableForState + ", drugs=" + requiredDrugs + ", stateAfterTreatment=" + stateAfterTreatment + ", stateWtithoutTreatment=" + stateWtithoutTreatment + '}';
 //    }
-//
-//    public boolean noDrugRule() {
-//        return drugs.contains(NO_DRUGS);
-//    }
+
     boolean isApplicableForState(State patientState) {
-        return initialState.equals(patientState)
-                || (initialState.isAllNotDead() && patientState.isAlive());
+        return applicableForState.matches(patientState);
     }
 
-    public State getResultingState(State patientState, Set<String> usedDrugs) {
-
-        State r = getResultingState2(patientState, usedDrugs);
-        System.out.println("patientState=" + patientState + ", usedDrugs=" + usedDrugs + ", r=" + r);
-        return r;
-    }
-
-    State getResultingState2(State patientState, Set<String> usedDrugs) {
-
-        if (!isApplicableForState(patientState)) {
-            System.out.println("NA");
+    public State applyRuleToGetNewState(State patientState, Set<String> usedDrugs) {
+        if (!isApplicableForState(patientState)) {  // skip rule
             return patientState;
         }
 
-        if (usedDrugs.containsAll(drugs)) {
+        if (usedDrugs.containsAll(requiredDrugs)) {
             return stateAfterTreatment.getNewState(patientState);
         }
 
