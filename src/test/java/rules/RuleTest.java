@@ -30,7 +30,7 @@ public class RuleTest {
     String exec(int ruleIdx, String patientState, String usedDrugs) {
         return rules.get(ruleIdx).
                 applyRuleToGetNewState(new State(patientState),
-                        commaSeparatedStringToSet(usedDrugs)).stateString;
+                        commaSeparatedStringToSet(usedDrugs)).getStateString();
     }
 
     @Test

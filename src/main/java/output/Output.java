@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package output;
 
 import java.util.Arrays;
@@ -18,28 +13,29 @@ import rules.State;
  */
 public class Output {
 
-    Map<String, Integer> map = new HashMap<>();
-    List<String> format = Arrays.asList("F", "H", "D", "T", "X");
+    // It should be a comma separated string with number of patients with a given state, following
+    // the format: F:NP,H:NP,D:NP,T:NP,X:NP
+    static List<String> formattingTemplate = Arrays.asList("F", "H", "D", "T", "X");
 
-    public void addState(State stateObj) {
-        String state = stateObj.getState();
-        Integer count = map.get(state);
-        if (count == null) {
-            count = 1;
-        } else {
-            count++;
-        }
-        map.put(state, count);
+    Map<String, Long> stateCountMap;
+
+    protected List<String> getFormattingTemplate() {
+        return formattingTemplate;
     }
 
-    String formatState(String state) {
-        return state + ":" + (map.get(state) != null ? map.get(state) : 0);
+    Long getStateCount(String state) {
+        return stateCountMap.getOrDefault(state, 0L);
     }
 
-    public String getOutput() {
-        System.out.println(map);
-        return format.stream().map(state -> formatState(state)).collect(Collectors.joining(","));
+    protected String formatState(String state) {
+        return state + ":" + getStateCount(state);
     }
 
-// order output
+    public String formatOutput(List<State> states) {
+        stateCountMap = states.stream().collect(Collectors.groupingBy(state -> state.getStateString(), Collectors.counting()));
+
+        return getFormattingTemplate().stream()
+                .map(state -> formatState(state))
+                .collect(Collectors.joining(","));
+    }
 }

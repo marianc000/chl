@@ -40,10 +40,10 @@ public class State {
         return equals(patientState)
                 || (isWildcardForAlive() && patientState.isAlive());   // patient cannot have a wildcard state, so no need to check
     }
-//
-//    public String getStateString() {
-//        return stateString;
-//    }
+ 
+    public String getStateString() {
+        return stateString;
+    }
 
     public boolean equals(State state) {
         return stateString.equals(state.stateString);
