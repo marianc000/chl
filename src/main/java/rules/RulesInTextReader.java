@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package rules;
 
 import java.io.IOException;
@@ -19,18 +14,25 @@ import static utils.Utils.readTextLinesFromResource;
  */
 public class RulesInTextReader {
 
-    String RULES_FILE_NAME = "/ruleList";
+    static String RULES_RESOURCE_NAME = "/ruleList";
+    static Pattern SPACE_BETWEEN_VALUES_PATTERN = Pattern.compile("[ \\t]+");
+
+    protected String getRulesResourceName() {
+        return RULES_RESOURCE_NAME;
+    }
+
+    protected Pattern getPatternToSplitLineIntoValues() {
+        return SPACE_BETWEEN_VALUES_PATTERN;
+    }
 
     List<String> readText() throws IOException {
-        List<String> lines = readTextLinesFromResource(RULES_FILE_NAME);
+        List<String> lines = readTextLinesFromResource(getRulesResourceName());
         lines.removeIf(line -> line.startsWith("#") || line.trim().isEmpty());
         return lines;
     }
 
-    Pattern emptySpacePattern = Pattern.compile("[ \\t]+");
-
     String[] extractParameteresFromLine(String text) {
-        return emptySpacePattern.split(text);
+        return getPatternToSplitLineIntoValues().split(text);
     }
 
     Prognosis extractExpectedStateWithProbability(String str) { // H/1000000 or X
