@@ -5,7 +5,7 @@
  */
 package main;
 
-import static main.MyMain.parseAndRun;
+import static main.Main.parseAndRun;
 import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -14,9 +14,9 @@ import org.junit.Test;
  *
  * @author mcaikovs
  */
-public class MyMainTest {
+public class MainTest {
 
-    MyMain i = new MyMain();
+    Main i = new Main();
 
     @Test
     public void testRun() throws IOException {

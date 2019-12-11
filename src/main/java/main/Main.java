@@ -16,7 +16,7 @@ import static utils.Utils.commaSeparatedStringToSet;
  *
  * @author mcaikovs
  */
-public class MyMain {
+public class Main {
 
     List<State> convertEachStateToASingleState(List<State> states, Set<String> drugs, List<Rule> rules) {
         //   System.out.println(">run: states: " + states + "; drugs: " + drugs);
@@ -42,7 +42,7 @@ public class MyMain {
 
         List<Rule> rules = new RulesInTextLoader().getRules();
 
-        List<State> newStates = new MyMain().convertEachStateToASingleState(states, drugs, rules);
+        List<State> newStates = new Main().convertEachStateToASingleState(states, drugs, rules);
 
         return new Output().formatOutput(newStates);
     }
