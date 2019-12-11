@@ -18,11 +18,6 @@ public class Rule {
         this.stateAfterTreatment = stateAfterTreatment;
         this.stateWtithoutTreatment = stateWtithoutTreatment;
     }
-//
-//    @Override
-//    public String toString() {
-//        return "Rule{" + "applicableForState=" + applicableForState + ", drugs=" + requiredDrugs + ", stateAfterTreatment=" + stateAfterTreatment + ", stateWtithoutTreatment=" + stateWtithoutTreatment + '}';
-//    }
 
     boolean isApplicableForState(State patientState) {
         return applicableForState.matches(patientState);

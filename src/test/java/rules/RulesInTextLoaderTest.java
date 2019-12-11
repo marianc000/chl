@@ -9,11 +9,9 @@ import static org.junit.Assert.*;
  *
  * @author mcaikovs
  */
-public class RulesInTextReaderTest {
-
-    public RulesInTextReaderTest() {
-    }
-    RulesInTextReader i = new RulesInTextReader();
+public class RulesInTextLoaderTest {
+ 
+    RulesInTextLoader i = new RulesInTextLoader();
 
     @Test
     public void testreadText() throws IOException {

@@ -12,7 +12,7 @@ import static utils.Utils.readTextLinesFromResource;
  *
  * @author mcaikovs
  */
-public class RulesInTextReader {
+public class RulesInTextLoader {
 
     static String RULES_RESOURCE_NAME = "/ruleList";
     static Pattern SPACE_BETWEEN_VALUES_PATTERN = Pattern.compile("[ \\t]+");

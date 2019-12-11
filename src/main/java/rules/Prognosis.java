@@ -32,9 +32,4 @@ public class Prognosis {
         }
         return currentState;
     }
-//
-//    @Override
-//    public String toString() {
-//        return nextState + "/" + inverseProbability;
-//    }
 }
