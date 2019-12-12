@@ -1,7 +1,6 @@
 package output;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -11,7 +10,7 @@ import rules.State;
  *
  * @author mcaikovs
  */
-public class Output {
+public class OutputFormatter {
 
     // It should be a comma separated string with number of patients with a given state, following
     // the format: F:NP,H:NP,D:NP,T:NP,X:NP

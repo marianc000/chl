@@ -17,16 +17,16 @@ public class StateTest {
     @Test
     public void testDoesMatch() {
         State stateInRule = new State("F");
-        assertTrue(stateInRule.matches(new State("F")));
-        assertFalse(stateInRule.matches(new State("T")));
+        assertTrue(stateInRule.inRuleMatchesPatientState(new State("F")));
+        assertFalse(stateInRule.inRuleMatchesPatientState(new State("T")));
 
         stateInRule = new State("X");
-        assertTrue(stateInRule.matches(new State("X")));
-        assertFalse(stateInRule.matches(new State("T")));
+        assertTrue(stateInRule.inRuleMatchesPatientState(new State("X")));
+        assertFalse(stateInRule.inRuleMatchesPatientState(new State("T")));
 
         stateInRule = new State("*");
-        assertTrue(stateInRule.matches(new State("T")));
-        assertFalse(stateInRule.matches(new State("X")));
+        assertTrue(stateInRule.inRuleMatchesPatientState(new State("T")));
+        assertFalse(stateInRule.inRuleMatchesPatientState(new State("X")));
     }
 
 }

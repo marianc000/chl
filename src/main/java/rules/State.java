@@ -36,7 +36,7 @@ public class State {
         return noNewStateString().equals(stateString);
     }
 
-    public boolean matches(State patientState) {
+    public boolean inRuleMatchesPatientState(State patientState) {
         return equals(patientState)
                 || (isWildcardForAlive() && patientState.isAlive());   // patient cannot have a wildcard state, so no need to check
     }

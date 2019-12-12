@@ -20,7 +20,7 @@ public class Rule {
     }
 
     boolean isApplicableForState(State patientState) {
-        return applicableForState.matches(patientState);
+        return applicableForState.inRuleMatchesPatientState(patientState);
     }
 
     public State applyRuleToGetNewState(State patientState, Set<String> usedDrugs) {

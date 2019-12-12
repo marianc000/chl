@@ -11,9 +11,9 @@ import rules.State;
  *
  * @author mcaikovs
  */
-public class OutputTest {
+public class OutputFormatterTest {
 
-    Output i = new Output();
+    OutputFormatter i = new OutputFormatter();
 
     @Test
     public void testSomeMethod() {
